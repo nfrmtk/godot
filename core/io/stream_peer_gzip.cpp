@@ -76,6 +76,7 @@ Error StreamPeerGZIP::start_decompression(bool p_is_deflate, int buffer_size) {
 
 Error StreamPeerGZIP::_start(bool p_compress, bool p_is_deflate, int buffer_size) {
 	ERR_FAIL_COND_V(ctx != nullptr, ERR_ALREADY_IN_USE);
+	ERR_FAIL_COND_V_MSG(buffer_size <= 0, ERR_INVALID_PARAMETER, "provided buffer_size is invalid. try setting buffer_size > 0");
 	clear();
 	compressing = p_compress;
 	rb.resize(nearest_shift(buffer_size - 1));
